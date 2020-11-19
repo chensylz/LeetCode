@@ -30,7 +30,5 @@ func partition(nums []int, start, end int) int {
 }
 
 func swap(nums []int, i, j int) {
-	t := nums[i]
-	nums[i] = nums[j]
-	nums[j] = t
+	nums[i], nums[j] = nums[j], nums[i]
 }
