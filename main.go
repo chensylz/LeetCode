@@ -11,4 +11,6 @@ func main() {
 	fmt.Println(SoredFunction.MergeSort(Tools.GenerateRandArray(10)))
 	fmt.Println(SoredFunction.BubbleSort(Tools.GenerateRandArray(10)))
 	fmt.Println(SoredFunction.SelectionSort(Tools.GenerateRandArray(10)))
+	fmt.Println(SoredFunction.InsertSort(Tools.GenerateRandArray(10)))
+	fmt.Println(SoredFunction.ShellSort(Tools.GenerateRandArray(10)))
 }
