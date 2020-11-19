@@ -9,13 +9,10 @@ func mergeSort(nums []int) []int {
 		return nums
 	}
 
-	// 分治法: divide分成两段
 	mid := len(nums) / 2
 	left := mergeSort(nums[:mid])
 	right := mergeSort(nums[mid:])
-
 	result := merge(left, right)
-
 	return result
 }
 
@@ -31,7 +28,6 @@ func merge(left, right []int) (result []int) {
 			l++
 		}
 	}
-
 	result = append(result, left[l:]...)
 	result = append(result, right[r:]...)
 	return
