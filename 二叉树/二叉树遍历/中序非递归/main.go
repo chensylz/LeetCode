@@ -13,18 +13,21 @@ import (
 */
 
 func inorderTraversal(root *DataStructure.TreeNode) []int {
-	result := make([]int, 0)
 	if root == nil {
-		return result
+		return nil
 	}
 
+	result := make([]int, 0)
 	stack := make([]*DataStructure.TreeNode, 0)
+
 	for root != nil || len(stack) != 0 {
 		for root != nil {
-			// 入栈
+			// 根节点在左节点之后入栈
 			stack = append(stack, root)
 			root = root.Left
 		}
+
+		// 出栈
 		node := stack[len(stack) - 1]
 		stack = stack[:len(stack) - 1]
 		result = append(result, node.Val)
@@ -34,5 +37,6 @@ func inorderTraversal(root *DataStructure.TreeNode) []int {
 }
 
 func main() {
+	// [3 5 2 4 1 6]
 	fmt.Println(inorderTraversal(Tools.GenerateBinaryTree()))
 }

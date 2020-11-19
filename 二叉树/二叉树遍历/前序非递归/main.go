@@ -16,7 +16,6 @@ func preorderTraversal(root *DataStructure.TreeNode) []int {
 	if root == nil {
 		return nil
 	}
-
 	result := make([]int, 0)
 	stack := make([]*DataStructure.TreeNode, 0)
 
@@ -28,15 +27,15 @@ func preorderTraversal(root *DataStructure.TreeNode) []int {
 			root = root.Left
 		}
 
-		// 出栈
+		// 到底出栈
 		node := stack[len(stack) - 1]
 		stack = stack[:len(stack) - 1]
 		root = node.Right
 	}
-
 	return result
 }
 
 func main() {
+	// [1 2 3 5 4 6]
 	fmt.Println(preorderTraversal(Tools.GenerateBinaryTree()))
 }

@@ -20,28 +20,29 @@ func postorderTraversal(root *DataStructure.TreeNode) []int {
 
 	 result := make([]int, 0)
 	 stack := make([]*DataStructure.TreeNode, 0)
-	 var lastVisit *DataStructure.TreeNode
+	 var lastVisitNode *DataStructure.TreeNode
 
-	 for root != nil || len(stack) > 0 {
+	 for root != nil || len(stack) != 0 {
 	 	for root != nil {
 	 		stack = append(stack, root)
 	 		root = root.Left
 		}
 
+		// 根节点先出
 		node := stack[len(stack) - 1]
-
-		// 根节点需在右节点弹出之后，再弹出
-		if node.Right == nil || node.Right == lastVisit {
+		if node.Right == nil || lastVisitNode == node.Right {
 			stack = stack[:len(stack) - 1]
 			result = append(result, node.Val)
-			lastVisit = node
+			lastVisitNode = node
 		} else {
 			root = node.Right
 		}
 	 }
+
 	 return result
 }
 
 func main() {
+	// [5 3 4 2 6 1]
 	fmt.Println(postorderTraversal(Tools.GenerateBinaryTree()))
 }
