@@ -16,18 +16,18 @@ func inorderTraversal(root *TreeNode) []int {
 	if root == nil {
 		return nil
 	}
-	result := make([]int, 0)
 	stack := make([]*TreeNode, 0)
-	for len(stack) > 0 || root != nil {
+	result := make([]int, 0)
+
+	for root != nil || len(stack) != 0 {
 		for root != nil {
 			stack = append(stack, root)
 			root = root.Left
 		}
-
-		// 弹出
+		// 出栈
 		node := stack[len(stack) - 1]
-		stack = stack[:len(stack) - 1]
 		result = append(result, node.Val)
+		stack = stack[:len(stack) - 1]
 		root = node.Right
 	}
 	return result
