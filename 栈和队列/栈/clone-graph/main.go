@@ -23,7 +23,7 @@ func clone(node *Node, visited map[*Node]*Node) *Node {
 	if v, ok := visited[node]; ok {
 		return v
 	}
-	newNode := &Node {
+	newNode := &Node{
 		Val: node.Val,
 		Neighbors: make([]*Node, len(node.Neighbors)),
 	}

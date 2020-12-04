@@ -8,20 +8,19 @@ https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
 
 func largestRectangleArea(heights []int) int {
 	n := len(heights)
-	left, right := make([]int, n), make([]int, n)
-	for i := 0; i < n; i++ {
-		right[i] = n
+	if n == 0 {
+		return 0
 	}
-	stack := make([]int, 0)
-	for i := 0; i < n; i++ {
+	stack := make([]int, n)
+	left, right := make([]int, n), make([]int, n)
+	for i := 0; i < len(heights); i++ {
 		for len(stack) > 0 && heights[stack[len(stack) - 1]] >= heights[i] {
-			// 当它被弹出时，代表着它的右边没有柱子比它高了
 			right[stack[len(stack) - 1]] = i
 			stack = stack[:len(stack) - 1]
 		}
 
 		if len(stack) == 0 {
-			left[i] = -1
+			left[i] = i
 		} else {
 			left[i] = stack[len(stack) - 1]
 		}
