@@ -6,15 +6,14 @@ https://leetcode-cn.com/problems/single-number-ii/
  */
 
 func singleNumber(nums []int) int {
-	// 统计每位1的个数
 	var result int
+	// 计算64位中，1的个数
 	for i := 0; i < 64; i++ {
 		sum := 0
 		for j := 0; j < len(nums); j++ {
-			// 统计1的个数
+			// 统计这个数有多少个1
 			sum += (nums[j] >> i) & 1
 		}
-		// 还原位00^10=10 或者用| 也可以
 		result ^= (sum % 3) << i
 	}
 	return result
