@@ -22,7 +22,7 @@ func lengthOfLIS(nums []int) int {
 	}
 	result := dp[0]
 	for i := 1; i < n; i++ {
-		result = max(dp[i], result)
+		result = max(result, dp[i])
 	}
 	return result
 }
