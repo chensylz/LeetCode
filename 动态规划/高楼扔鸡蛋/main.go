@@ -1,11 +1,21 @@
 package main
 
+import (
+	"strconv"
+)
+
 /**
 887. 鸡蛋掉落
 https://leetcode-cn.com/problems/super-egg-drop/
+
+定义 dp[i][j]
+在i个鸡蛋做检测j层时，最坏情况下至少抛鸡蛋的次数
+dp[i][j] = min(dp[i][j], max(dp[i - 1][k - 1], dp[i][j - k]) + 1) ,  1<=k<=j
+此时， dp[i - 1][k - 1] 表示在j层时鸡蛋碎了，鸡蛋i -1, 楼层数为 k - 1
+
  */
 
-func superEggDrop(K int, N int) int {
+func superEggDropv1(K int, N int) int {
 	if K == 1  {
 		return N
 	}
@@ -57,4 +67,77 @@ func min(x, y int) int {
 		return y
 	}
 	return x
+}
+
+//////////////////////////////       V2      ////////////////////////////////
+
+func superEggDropV2(K int, N int) int {
+	memo := make(map[string]int)
+	return dp(memo, K, N)
+}
+
+func dpV2(memo map[string]int, K, N int) int {
+	if K == 1 {
+		return N
+	}
+	if N == 0 {
+		return 0
+	}
+	if value, ok := memo[strconv.Itoa(K) + "," + strconv.Itoa(N)]; ok {
+		return value
+	}
+	var result int
+	result = 2 << 31
+	for i := 1; i <= N; i++ {
+		result = min(result, max(
+			dp(memo, K - 1, i - 1), // 碎了
+			dp(memo, K, N - i), // 没碎
+		) + 1)
+	}
+	memo[strconv.Itoa(K) + "," + strconv.Itoa(N)] = result
+	return result
+}
+
+
+//////////////////////////////       V3       ////////////////////////////////
+func superEggDrop(K int, N int) int {
+	memo := make(map[string]int)
+	return dp(memo, K, N)
+}
+
+func dp(memo map[string]int, K, N int) int {
+	if K == 1 {
+		return N
+	}
+	if N == 0 {
+		return 0
+	}
+	if value, ok := memo[strconv.Itoa(K) + "," + strconv.Itoa(N)]; ok {
+		return value
+	}
+	var result int
+	result = 2 << 31
+	//for i := 1; i <= N; i++ {
+	//	result = min(result, max(
+	//		dp(memo, K - 1, i - 1), // 碎了
+	//		dp(memo, K, N - i), // 没碎
+	//	) + 1)
+	//}
+	// 使用二分搜索
+	left , right := 1, N
+	for left <= right {
+		mid := (left + right) / 2
+		broken := dp(memo, K - 1, mid - 1)
+		noBroken := dp(memo, K, N - mid)
+		if broken > noBroken {
+			right = mid - 1
+			result = min(result, broken + 1)
+		} else {
+			left = mid + 1
+			result = min(result, noBroken+ 1)
+		}
+	}
+
+	memo[strconv.Itoa(K) + "," + strconv.Itoa(N)] = result
+	return result
 }
