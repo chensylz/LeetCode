@@ -11,8 +11,8 @@ https://leetcode-cn.com/problems/super-egg-drop/
 定义 dp[i][j]
 在i个鸡蛋做检测j层时，最坏情况下至少抛鸡蛋的次数
 dp[i][j] = min(dp[i][j], max(dp[i - 1][k - 1], dp[i][j - k]) + 1) ,  1<=k<=j
-此时， dp[i - 1][k - 1] 表示在j层时鸡蛋碎了，鸡蛋i -1, 楼层数为 k - 1
-
+此时， dp[i - 1][k - 1] 表示在j层时鸡蛋碎了，鸡蛋i -1, 向下查找，楼层数为 k - 1
+      dp[i][k - i] 表示鸡蛋没碎，继续向上查询，剩余楼层 j - k
  */
 
 func superEggDropv1(K int, N int) int {
