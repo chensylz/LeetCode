@@ -1,7 +1,7 @@
-# GoLeetCode
+# LeetCode
 
 #### 介绍
-使用go语言做leetcode的题
+使用go语言和python做leetcode的题
 
 #### 参考链接
-[https://greyireland.gitbook.io/algorithm-pattern/](https://greyireland.gitbook.io/algorithm-pattern/)
+[https://labuladong.gitbook.io/algo/](https://labuladong.gitbook.io/algo/)
