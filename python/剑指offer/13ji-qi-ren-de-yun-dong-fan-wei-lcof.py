@@ -29,3 +29,7 @@ class Solution:
             total += x % 10
             x //= 10
         return total
+
+
+if __name__ == '__main__':
+    Solution().movingCount(2, 3, 1)
