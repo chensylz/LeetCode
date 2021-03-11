@@ -7,11 +7,13 @@ https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
 import collections
 from typing import List
 
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
@@ -20,24 +22,17 @@ class Solution:
         q = collections.deque()
         q.append(root)
         res = []
-        change = 1
         while len(q):
-            tmp_arr = []
+            tmp_arr = collections.deque()
             for i in range(len(q)):
                 node = q.popleft()
-                tmp_arr.append(node.val)
-                left, right = node.left, node.right
-                if change == 0:
-                    if left:
-                        q.append(left)
-                    if right:
-                        q.append(right)
-                    change = 1
+                if len(res) % 2:
+                    tmp_arr.appendleft(node.val)  # 偶数层 -> 队列头部
                 else:
-                    if right:
-                        q.append(right)
-                    if left:
-                        q.append(left)
-                    change = 0
-            res.append(tmp_arr)
+                    tmp_arr.append(node.val)  # 奇数层 -> 队列尾部
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            res.append(list(tmp_arr))
         return res
