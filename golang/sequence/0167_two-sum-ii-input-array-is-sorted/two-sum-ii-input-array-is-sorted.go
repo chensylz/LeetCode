@@ -11,3 +11,20 @@ func twoSum(numbers []int, target int) []int {
 	}
 	return nil
 }
+
+func towSum2(numbers []int, target int) []int {
+	for i := 0; i < len(numbers); i++ {
+		l, r := i + 1, len(numbers) - 1
+		for l <= r {
+			mid := (r - l) / 2 + l
+			if numbers[mid] == target - numbers[i] {
+				return []int{i, mid}
+			} else if numbers[mid] > target - numbers[i] {
+				r = mid - 1
+			} else {
+				l = mid + 1
+			}
+		}
+	}
+	return nil
+}
