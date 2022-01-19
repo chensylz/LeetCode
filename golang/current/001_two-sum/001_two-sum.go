@@ -1,4 +1,4 @@
-package current
+package _01_two_sum
 
 func twoSum(nums []int, target int) []int {
 	targetMap := make(map[int]int)
