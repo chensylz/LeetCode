@@ -40,3 +40,11 @@ func (s *SortTestSuite) TestSelect() {
 	sort.Ints(actual)
 	s.Equal(actual, nums)
 }
+
+func (s *SortTestSuite) TestShell() {
+	nums := tools.GenerateRandomInts(10)
+	sortedfunction.Shell(nums)
+	actual := tools.Copy(nums)
+	sort.Ints(actual)
+	s.Equal(actual, nums)
+}

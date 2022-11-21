@@ -6,15 +6,8 @@ package sortedfunction
 // 在已排序的子集中找到它所属的位置并将其插入那里。它重复直到没有输入元素
 func Insert(nums []int) {
 	for i := 1; i < len(nums); i++ {
-		current := nums[i]
-		var index int
-		for index = i - 1; index >= 0; index-- {
-			if nums[index] > current {
-				nums[index+1] = nums[index]
-			} else {
-				break
-			}
+		for j := i - 1; j >= 0 && nums[j] > nums[j+1]; j-- {
+			nums[j], nums[j+1] = nums[j+1], nums[j]
 		}
-		nums[index+1] = current
 	}
 }
